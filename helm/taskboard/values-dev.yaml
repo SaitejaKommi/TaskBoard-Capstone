@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  className: nginx
+  host: taskboard.local
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+serviceMonitor:
+  enabled: true
+
+replicaCount:
+  backend: 1
+  frontend: 1
+
+autoscaling:
+  enabled: false

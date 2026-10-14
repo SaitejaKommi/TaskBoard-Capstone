@@ -1,0 +1,48 @@
+# Troubleshooting Exercise 2: Broken Service (label mismatch)
+# This Service has wrong selector labels so it selects no Pods
+#
+# Steps to diagnose:
+#   kubectl apply -f troubleshooting/broken-service.yaml
+#   kubectl get svc -n taskboard
+#   kubectl get endpoints -n taskboard
+#   kubectl get pods --show-labels -n taskboard
+#
+# Expected: Service exists but Endpoints are empty
+# Root cause: selector label "app: backend-WRONG" doesn't match any Pod
+# Fix: Change selector to match actual Pod labels (app: backend)
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broken-service-demo
+  namespace: taskboard
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: python:3.12-slim
+          command: ["python", "-m", "http.server", "8000"]
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: broken-service-demo
+  namespace: taskboard
+spec:
+  selector:
+    app: backend-WRONG
+  ports:
+    - port: 8000
+      targetPort: 8000

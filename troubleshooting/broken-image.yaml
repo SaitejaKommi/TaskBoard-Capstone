@@ -1,0 +1,35 @@
+# Troubleshooting Exercise 1: Broken Image
+# This deployment uses a non-existent image tag to simulate ImagePullBackOff
+#
+# Steps to diagnose:
+#   kubectl apply -f troubleshooting/broken-image.yaml
+#   kubectl get pods -n taskboard
+#   kubectl describe pod <pod-name> -n taskboard
+#   kubectl get events --sort-by=.lastTimestamp -n taskboard
+#
+# Expected error: ErrImagePull / ImagePullBackOff
+# Root cause: Image tag "does-not-exist" doesn't exist in registry
+# Fix: Update the image tag to a valid one
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broken-image-demo
+  namespace: taskboard
+  labels:
+    app: broken-image-demo
+    exercise: troubleshooting
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broken-image-demo
+  template:
+    metadata:
+      labels:
+        app: broken-image-demo
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/invalid-org/taskboard-backend:does-not-exist
+          ports:
+            - containerPort: 8000

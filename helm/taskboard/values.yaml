@@ -1,0 +1,63 @@
+# ── Global ────────────────────────────────────────────────────────────────────
+replicaCount:
+  backend: 2
+  frontend: 2
+
+# ── Backend ───────────────────────────────────────────────────────────────────
+backend:
+  image:
+    repository: ghcr.io/YOUR_GITHUB_USERNAME/taskboard-backend
+    pullPolicy: IfNotPresent
+    tag: latest
+  port: 8000
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  env:
+    DATABASE_URL: "postgresql+psycopg://taskboard:taskboard@postgres:5432/taskboard"
+
+# ── Frontend ──────────────────────────────────────────────────────────────────
+frontend:
+  image:
+    repository: ghcr.io/YOUR_GITHUB_USERNAME/taskboard-frontend
+    pullPolicy: IfNotPresent
+    tag: latest
+  port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+# ── PostgreSQL ────────────────────────────────────────────────────────────────
+postgres:
+  image: postgres:16-alpine
+  database: taskboard
+  username: taskboard
+  password: taskboard
+  storage: 5Gi
+
+# ── HPA ───────────────────────────────────────────────────────────────────────
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+# ── Ingress ───────────────────────────────────────────────────────────────────
+ingress:
+  enabled: false
+  className: nginx
+  host: taskboard.local
+  annotations: {}
+
+# ── Monitoring ────────────────────────────────────────────────────────────────
+serviceMonitor:
+  enabled: false
+  interval: 30s
