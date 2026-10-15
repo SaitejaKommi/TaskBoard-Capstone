@@ -6,7 +6,7 @@ replicaCount:
 # ── Backend ───────────────────────────────────────────────────────────────────
 backend:
   image:
-    repository: ghcr.io/YOUR_GITHUB_USERNAME/taskboard-backend
+    repository: ghcr.io/saitejakommi/taskboard-backend
     pullPolicy: IfNotPresent
     tag: latest
   port: 8000
@@ -23,7 +23,7 @@ backend:
 # ── Frontend ──────────────────────────────────────────────────────────────────
 frontend:
   image:
-    repository: ghcr.io/YOUR_GITHUB_USERNAME/taskboard-frontend
+    repository: ghcr.io/saitejakommi/taskboard-frontend
     pullPolicy: IfNotPresent
     tag: latest
   port: 80
