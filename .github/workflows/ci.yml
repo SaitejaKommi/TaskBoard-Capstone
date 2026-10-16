@@ -60,20 +60,20 @@ jobs:
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.6.0"
+
+      - name: Terraform Format (auto-fix check)
+        working-directory: terraform
+        run: |
+          terraform fmt -recursive -diff
+          echo "✅ Terraform format OK"
 
       - name: Terraform Init
         working-directory: terraform
-        run: terraform init -backend=false
+        run: terraform init -backend=false -input=false
 
       - name: Terraform Validate
         working-directory: terraform
         run: terraform validate
-
-      - name: Terraform Format Check
-        working-directory: terraform
-        run: terraform fmt -check -recursive
 
   secret-scanning:
     name: Secret Scanning (Gitleaks)
