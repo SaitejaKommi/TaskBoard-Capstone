@@ -1,15 +1,15 @@
-# ⬡ TaskBoard — DevOps Capstone Project
+# TaskBoard | Full-Stack DevOps Capstone
 
-A production-grade, SaaS-style project management application demonstrating the full DevOps lifecycle — from a developer laptop to a monitored Kubernetes environment on AWS.
+TaskBoard is a SaaS-style project management application and an end-to-end DevOps capstone. It brings together a React dashboard, FastAPI service, and PostgreSQL database with an automated delivery path to AWS Kubernetes.
 
-```
-Developer → Git/GitHub → GitHub Actions → Docker → Trivy → GHCR → Terraform → EKS → Helm → Prometheus/Grafana
-```
+**The delivery path:** GitHub Actions runs tests and builds container images, Trivy scans them, GHCR stores them, and Terraform and Helm provision and deploy the application to Amazon EKS. Prometheus and Grafana provide monitoring.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
+- [Project Presentation](#project-presentation)
+- [Submission Materials](#submission-materials)
 - [Architecture](#architecture)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
@@ -26,6 +26,44 @@ Developer → Git/GitHub → GitHub Actions → Docker → Trivy → GHCR → Te
 - [Troubleshooting Exercises](#troubleshooting-exercises)
 - [API Reference](#api-reference)
 - [Project Structure](#project-structure)
+- [How to Run (Windows)](#how-to-run-windows)
+- [Known Limitations & Manual Steps](#known-limitations--manual-steps)
+
+---
+
+## Project Presentation
+
+The seven-slide presentation gives a visual overview of the goals, architecture, delivery pipeline, infrastructure, monitoring, and future work. Select any slide to view it at full size.
+
+<details>
+<summary><strong>View all seven presentation slides</strong></summary>
+
+<table>
+  <tr>
+    <td align="center"><strong>01 · TaskBoard</strong><br><a href="slides/TaskBoard_slide_1.png"><img src="slides/TaskBoard_slide_1.png" width="480" alt="TaskBoard DevOps capstone title slide"></a></td>
+    <td align="center"><strong>02 · Introduction and Objectives</strong><br><a href="slides/TaskBoard_slide_2.png"><img src="slides/TaskBoard_slide_2.png" width="480" alt="Project introduction and objectives"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>03 · Application Architecture</strong><br><a href="slides/TaskBoard_slide_3.png"><img src="slides/TaskBoard_slide_3.png" width="480" alt="Frontend, backend, and database architecture"></a></td>
+    <td align="center"><strong>04 · Delivery Pipeline</strong><br><a href="slides/TaskBoard_slide_4.png"><img src="slides/TaskBoard_slide_4.png" width="480" alt="Automated delivery pipeline from GitHub to AWS"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>05 · Infrastructure and Kubernetes</strong><br><a href="slides/TaskBoard_slide_5.png"><img src="slides/TaskBoard_slide_5.png" width="480" alt="Terraform, AWS, Kubernetes, and Helm infrastructure"></a></td>
+    <td align="center"><strong>06 · Monitoring, Testing, and Troubleshooting</strong><br><a href="slides/TaskBoard_slide_6.png"><img src="slides/TaskBoard_slide_6.png" width="480" alt="Testing, monitoring, and Kubernetes troubleshooting"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>07 · Conclusion and Future Work</strong><br><a href="slides/TaskBoard_slide_7.png"><img src="slides/TaskBoard_slide_7.png" width="480" alt="Project outcomes and future enhancements"></a></td>
+    <td></td>
+  </tr>
+</table>
+
+</details>
+
+---
+
+## Submission Materials
+
+- [PowerPoint presentation and video links](demo/submissions.md)
 
 ---
 
